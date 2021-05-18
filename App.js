@@ -1,16 +1,22 @@
+//react-native run-android
+//npx react-native run-android
+
 import React from 'react';
-import {SafeAreaView, StyleSheet, TextInput, View, Text,ScrollView} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text,ScrollView} from 'react-native';
+import TodoInsert from './TodoInsert';
+import TodoList from './TodoList';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.appTitle}>Hello Todolist</Text>
       <View style={styles.card}>
-        <TextInput style={styles.input} placeholder="Add an item!" />
+        <View style={styles.button}>
+          <Button title={'ADD'} onPress={addTodoHandler} />
+        </View>
+        <TodoInsert />
+        <TodoList todos={todos} />
       </View>
-      <ScrollView>
-        <Text>TodoList</Text>
-      </ScrollView>
     </SafeAreaView>
   );
 };
