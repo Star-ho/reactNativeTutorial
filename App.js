@@ -1,12 +1,29 @@
-//react-native run-android
+//npx babel-node --presets @babel/env index.js
 //npx react-native run-android
 
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text,ScrollView} from 'react-native';
+import React,{useState} from 'react';
+import {SafeAreaView, StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
-const App = () => {
+
+
+const App = () => { 
+  const [todos, setTodos] = useState([]);
+
+  
+  const addTodoHandler = () => {
+    onAddTodo(newTodoItem);
+    setNewTodoItem('');
+  };
+
+  const addTodo = text => {
+    setTodos([
+      ...todos,
+      {id: Math.random().toString(), textValue: text, checked: false},
+    ]);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.appTitle}>Hello Todolist</Text>

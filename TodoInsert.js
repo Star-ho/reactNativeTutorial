@@ -4,10 +4,7 @@ import {Button, StyleSheet, TextInput, View} from 'react-native';
 const todoInputHandler = newTodo => {
   setNewTodoItem(newTodo);
 };
-const addTodoHandler = () => {
-  onAddTodo(newTodoItem);
-  setNewTodoItem('');
-};
+
 
 const TodoInsert = ({onAddTodo}) => {
   const [newTodoItem, setNewTodoItem] = useState('');
