@@ -3,14 +3,15 @@ import {StyleSheet, ScrollView, Text} from 'react-native';
 import TodoListItem from './TodoListItem';
 
 
-const TodoList = () => {
+const TodoList = ({todos}) => {
   return (
     <ScrollView contentContainerStyle={styles.listContainer}>
-      <TodoInsert onAddTodo={addTodo} />
+      {todos.map( (todo,index) => (
+        <TodoListItem key={index} {...todo} />
+        ))}
     </ScrollView>
   );
 };
-
 
 const styles = StyleSheet.create({
   listContainer: {

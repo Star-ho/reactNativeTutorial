@@ -2,36 +2,30 @@
 //npx react-native run-android
 
 import React,{useState} from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Button, ScrollView} from 'react-native';
-import TodoInsert from './TodoInsert';
+import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
 import TodoList from './TodoList';
-
-
 
 const App = () => { 
   const [todos, setTodos] = useState([]);
-
+  fetch("http://192.168.0.18:3000").then(res=>res.json())
+    .then(res=>{
+      let arr=[]
+      for(let i of Object.entries(res["baemin"])){
+        arr.push({brand: "baemin", name: i[0], discountAmount: i[1]})
+      }
+      for(let i of Object.entries(res["yogiyo"])){
+        arr.push({brand: "yogiyo", name: i[0], discountAmount: i[1]})
+      }
+      arr.sort((a,b)=>(a.name.localeCompare(b.name)))
+      console.log(arr)
+      setTodos([...arr])
+    })
   
-  const addTodoHandler = () => {
-    onAddTodo(newTodoItem);
-    setNewTodoItem('');
-  };
-
-  const addTodo = text => {
-    setTodos([
-      ...todos,
-      {id: Math.random().toString(), textValue: text, checked: false},
-    ]);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.appTitle}>Hello Todolist</Text>
       <View style={styles.card}>
-        <View style={styles.button}>
-          <Button title={'ADD'} onPress={addTodoHandler} />
-        </View>
-        <TodoInsert />
         <TodoList todos={todos} />
       </View>
     </SafeAreaView>
@@ -55,8 +49,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     flex: 1,
-    borderTopLeftRadius: 10, // to provide rounded corners
-    borderTopRightRadius: 10, // to provide rounded corners
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     marginLeft: 10,
     marginRight: 10,
   },
